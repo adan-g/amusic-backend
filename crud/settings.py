@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,30 +77,31 @@ WSGI_APPLICATION = 'crud.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'USER': 'amusic2024',
-        'PASSWORD': 'amusic2024',
-        'NAME': 'adanined_amusic',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    }
     # 'default': {
-    #     'ENGINE': 'mysql.connector.django',
+    #     'ENGINE': 'django.db.backends.mysql',
     #     'HOST': 'localhost',
     #     'PORT': '3306',
-    #     'USER': 'root',
+    #     'USER': 'amusic2024',
     #     'PASSWORD': 'amusic2024',
-    #     'NAME': 'amusic',
+    #     'NAME': 'adanined_amusic',
     #     'OPTIONS': {
     #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     #     }
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'Password-123456',
+        'NAME': 'amusic',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
 }
 
+pymysql.install_as_MySQLdb()
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
