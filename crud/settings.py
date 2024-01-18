@@ -88,11 +88,11 @@ DATABASES = {
         }
     }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
+    #     'ENGINE': 'mysql.connector.django',
     #     'HOST': 'localhost',
     #     'PORT': '3306',
     #     'USER': 'root',
-    #     'PASSWORD': 'Password-123456',
+    #     'PASSWORD': 'amusic2024',
     #     'NAME': 'amusic',
     #     'OPTIONS': {
     #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
