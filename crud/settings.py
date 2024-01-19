@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import pymysql
 
+import socket
+ip = socket.gethostbyname(socket.gethostname())
+    
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +30,7 @@ SECRET_KEY = 'django-insecure-n04!$(+9da(9j*7d0=d3lom^#28l^xvdxy@me2%)9-l&z8$_br
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.adangimenez.com', 'adangimenez.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'api'
 ]
@@ -45,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,6 +81,10 @@ WSGI_APPLICATION = 'crud.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+if "192.168.1.68" in ip.lower():
+    db_name = 'amusic'
+else:
+    db_name = 'adanined_amusic'
 
 DATABASES = {
     'default': {
@@ -83,22 +93,11 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'adanined_amusic',
         'PASSWORD': 'amusic2024',
-        'NAME': 'adanined_amusic',
+        'NAME': db_name,
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    #     'USER': 'root',
-    #     'PASSWORD': 'Password-123456',
-    #     'NAME': 'amusic',
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
-    # }
 }
 
 pymysql.install_as_MySQLdb()
@@ -143,3 +142,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'https://adangimenez.com']
